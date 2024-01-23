@@ -3,9 +3,7 @@ package com.flashcards.app.users;
 import com.flashcards.app.flashcardSets.FlashcardSet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,14 +13,16 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Table(name = "users")
+@Builder
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotEmpty
-    private String email;
+    private String username;
     @NotEmpty
     private String password;
     @ManyToMany
-    Set<FlashcardSet> flashcardSets = new HashSet<>();
+    private final Set<FlashcardSet> flashcardSets = new HashSet<>();
 }

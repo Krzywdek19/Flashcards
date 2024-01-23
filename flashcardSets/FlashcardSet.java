@@ -3,6 +3,7 @@ package com.flashcards.app.flashcardSets;
 import com.flashcards.app.flashcards.Flashcard;
 import com.flashcards.app.users.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +21,11 @@ public class FlashcardSet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
+    private String name;
+
     @OneToMany(mappedBy = "set", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Flashcard> flashcards = new HashSet<>();
+    private final Set<Flashcard> flashcards = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -29,5 +33,9 @@ public class FlashcardSet {
             joinColumns = @JoinColumn(name = "flashcard_set_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    Set<User> users = new HashSet<>();
+    private final Set<User> users = new HashSet<>();
+
+    public FlashcardSet(String name) {
+        this.name = name;
+    }
 }
