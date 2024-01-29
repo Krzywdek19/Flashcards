@@ -1,4 +1,4 @@
-package com.flashcards.app.flashcardSets;
+package com.flashcards.app.flashcardSets.dto;
 
 import com.flashcards.app.flashcards.Flashcard;
 import com.flashcards.app.users.User;

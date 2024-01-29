@@ -1,5 +1,6 @@
 package com.flashcards.app.flashcardSets;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flashcards.app.flashcards.Flashcard;
 import com.flashcards.app.users.User;
 import jakarta.persistence.*;
@@ -27,6 +28,7 @@ public class FlashcardSet {
     @OneToMany(mappedBy = "set", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private final Set<Flashcard> flashcards = new HashSet<>();
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "flashcard_sets_users",

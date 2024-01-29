@@ -1,5 +1,6 @@
 package com.flashcards.app.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flashcards.app.flashcardSets.FlashcardSet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,6 +24,6 @@ public class User {
     private String username;
     @NotEmpty
     private String password;
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
     private final Set<FlashcardSet> flashcardSets = new HashSet<>();
 }

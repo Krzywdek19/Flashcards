@@ -1,11 +1,11 @@
 package com.flashcards.app.flashcards;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flashcards.app.flashcardSets.FlashcardSet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.util.Set;
 
@@ -13,6 +13,8 @@ import java.util.Set;
 @Table(name = "flashcards")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Flashcard {
     @Id
@@ -24,7 +26,9 @@ public class Flashcard {
     @NotEmpty
     private String backSide;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "flashcard_set_id")
     private FlashcardSet set;
 }
